@@ -44,36 +44,36 @@ const Dashboard = () => {
       label: 'Quizzes Completed', 
       value: user?.stats?.quizzesCompleted || 0, 
       icon: CheckCircle, 
-      color: 'text-green-600', 
-      bg: 'bg-green-100' 
+      color: 'text-teal-600', 
+      bg: 'bg-teal-50' 
     },
     { 
       label: 'Study Streak', 
       value: `${user?.stats?.studyStreak || 0} days`, 
       icon: TrendingUp, 
       color: 'text-blue-600', 
-      bg: 'bg-blue-100' 
+      bg: 'bg-blue-50' 
     },
     { 
       label: 'Papers Summarized', 
       value: user?.stats?.papersSummarized || 0, 
       icon: FileText, 
-      color: 'text-purple-600', 
-      bg: 'bg-purple-100' 
+      color: 'text-cyan-600', 
+      bg: 'bg-cyan-50' 
     },
     { 
       label: 'Total Score', 
       value: user?.stats?.totalScore || 0, 
       icon: Trophy, 
-      color: 'text-yellow-600', 
-      bg: 'bg-yellow-100' 
+      color: 'text-indigo-600', 
+      bg: 'bg-indigo-50' 
     }
   ];
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -81,8 +81,8 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user?.name}! 👋</h1>
-        <p className="text-gray-600 mt-2">Here's your learning progress today</p>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">Welcome back, {user?.name}! 👋</h1>
+        <p className="text-gray-600 mt-2">Here's your learning progress on Med-G.AI</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -101,7 +101,7 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white">
+      <div className="bg-gradient-to-r from-teal-600 to-blue-600 rounded-xl p-8 text-white shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Quick Actions</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <button
@@ -141,7 +141,7 @@ const Dashboard = () => {
           <div className="space-y-4">
             {activity.map((item, index) => (
               <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
                 <div className="flex-1">
                   <p className="font-medium text-gray-900">{item.title}</p>
                   <p className="text-sm text-gray-600">
@@ -158,17 +158,17 @@ const Dashboard = () => {
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Performance Overview</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
+            <div className="text-center p-4 bg-teal-50 rounded-lg">
               <p className="text-sm text-gray-600 mb-1">Average Score</p>
-              <p className="text-3xl font-bold text-blue-600">{stats.averageScore}</p>
+              <p className="text-3xl font-bold text-teal-600">{stats.averageScore}</p>
             </div>
-            <div className="text-center p-4 bg-green-50 rounded-lg">
+            <div className="text-center p-4 bg-blue-50 rounded-lg">
               <p className="text-sm text-gray-600 mb-1">Total Quizzes</p>
-              <p className="text-3xl font-bold text-green-600">{stats.totalQuizzes}</p>
+              <p className="text-3xl font-bold text-blue-600">{stats.totalQuizzes}</p>
             </div>
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
+            <div className="text-center p-4 bg-cyan-50 rounded-lg">
               <p className="text-sm text-gray-600 mb-1">Success Rate</p>
-              <p className="text-3xl font-bold text-purple-600">
+              <p className="text-3xl font-bold text-cyan-600">
                 {stats.averageScore > 0 ? Math.round((stats.averageScore / 100) * 100) : 0}%
               </p>
             </div>

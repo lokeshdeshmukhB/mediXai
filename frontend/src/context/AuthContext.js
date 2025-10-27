@@ -15,13 +15,48 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showTimeoutWarning, setShowTimeoutWarning] = useState(false);
+
+  const TIMEOUT_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+  const WARNING_DURATION = 60 * 1000; // Show warning 1 minute before timeout
+  const timeoutRef = React.useRef(null);
+  const warningRef = React.useRef(null);
 
   const logout = useCallback(() => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('lastActivity');
     setUser(null);
     setIsAuthenticated(false);
+    setShowTimeoutWarning(false);
+    
+    // Clear timers
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (warningRef.current) clearTimeout(warningRef.current);
   }, []);
+
+  const resetTimeout = useCallback(() => {
+    // Clear existing timers
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (warningRef.current) clearTimeout(warningRef.current);
+    setShowTimeoutWarning(false);
+
+    if (isAuthenticated) {
+      // Update last activity time
+      localStorage.setItem('lastActivity', Date.now().toString());
+
+      // Set warning timer (show warning 1 minute before logout)
+      warningRef.current = setTimeout(() => {
+        setShowTimeoutWarning(true);
+      }, TIMEOUT_DURATION - WARNING_DURATION);
+
+      // Set logout timer
+      timeoutRef.current = setTimeout(() => {
+        logout();
+        alert('You have been logged out due to inactivity.');
+      }, TIMEOUT_DURATION);
+    }
+  }, [isAuthenticated, logout, TIMEOUT_DURATION, WARNING_DURATION]);
 
   const checkAuth = useCallback(async () => {
     const token = localStorage.getItem('token');
@@ -42,6 +77,38 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  // Initialize timeout when user becomes authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      resetTimeout();
+    }
+  }, [isAuthenticated, resetTimeout]);
+
+  // Track user activity
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const events = ['mousedown', 'keydown', 'scroll', 'touchstart', 'click'];
+    
+    const handleActivity = () => {
+      resetTimeout();
+    };
+
+    // Add event listeners
+    events.forEach(event => {
+      document.addEventListener(event, handleActivity);
+    });
+
+    // Cleanup
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, handleActivity);
+      });
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (warningRef.current) clearTimeout(warningRef.current);
+    };
+  }, [isAuthenticated, resetTimeout]);
 
   const login = async (email, password) => {
     try {
@@ -109,7 +176,9 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     updateUser,
-    refreshUser
+    refreshUser,
+    showTimeoutWarning,
+    resetTimeout
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

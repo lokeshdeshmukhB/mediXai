@@ -10,12 +10,12 @@ import {
   LogOut,
   Menu,
   User,
-  GraduationCap
+  Sparkles
 } from 'lucide-react';
 
 const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const { user, logout } = useAuth();
+  const { user, logout, showTimeoutWarning, resetTimeout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/login');
   };
 
   return (
@@ -40,12 +40,15 @@ const Layout = ({ children }) => {
       }`}>
         <div className="p-6">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
-              <GraduationCap className="w-6 h-6 text-white" />
-            </div>
+            <img 
+              src="/logo.jpg" 
+              alt="Med-G.AI Logo" 
+              className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
+            />
             {isSidebarOpen && (
               <div>
-                <h2 className="font-bold text-gray-900">PharmAcademy</h2>
+                <h2 className="font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">Med-G.AI</h2>
+                <p className="text-xs text-gray-500">Healthcare Intelligence</p>
               </div>
             )}
           </div>
@@ -57,7 +60,7 @@ const Layout = ({ children }) => {
                 onClick={() => navigate(item.path)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
                   location.pathname === item.path
-                    ? 'bg-blue-50 text-blue-600'
+                    ? 'bg-gradient-to-r from-teal-50 to-blue-50 text-teal-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >
@@ -95,7 +98,7 @@ const Layout = ({ children }) => {
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-teal-600 to-blue-600 rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -112,6 +115,29 @@ const Layout = ({ children }) => {
           {children}
         </main>
       </div>
+
+      {/* Timeout Warning Notification */}
+      {showTimeoutWarning && (
+        <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-2xl border-2 border-orange-500 p-6 max-w-sm z-50 animate-bounce">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <AlertTriangle className="w-6 h-6 text-orange-600" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-gray-900 mb-1">Session Expiring Soon!</h3>
+              <p className="text-sm text-gray-600 mb-3">
+                You will be logged out in 1 minute due to inactivity.
+              </p>
+              <button
+                onClick={resetTimeout}
+                className="w-full px-4 py-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white rounded-lg font-medium hover:from-teal-700 hover:to-blue-700 transition"
+              >
+                Stay Logged In
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

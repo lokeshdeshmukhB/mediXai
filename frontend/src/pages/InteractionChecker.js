@@ -121,7 +121,7 @@ const InteractionChecker = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for a drug..."
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
           />
         </div>
 
@@ -148,12 +148,12 @@ const InteractionChecker = () => {
               {selectedDrugs.map((drug, index) => (
                 <div
                   key={index}
-                  className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full flex items-center gap-2"
+                  className="bg-teal-100 text-teal-800 px-4 py-2 rounded-full flex items-center gap-2"
                 >
                   <span>{drug}</span>
                   <button
                     onClick={() => removeDrug(drug)}
-                    className="hover:bg-blue-200 rounded-full p-1"
+                    className="hover:bg-teal-200 rounded-full p-1"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -166,7 +166,7 @@ const InteractionChecker = () => {
         <button
           onClick={checkInteractions}
           disabled={selectedDrugs.length < 2 || loading}
-          className="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
+          className="w-full mt-6 bg-gradient-to-r from-teal-600 to-blue-600 text-white py-3 rounded-lg font-medium hover:from-teal-700 hover:to-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
         >
           {loading ? 'Checking Interactions...' : 'Check Interactions'}
         </button>
@@ -174,7 +174,7 @@ const InteractionChecker = () => {
 
       {loading && (
         <div className="text-center py-8">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Analyzing drug interactions...</p>
         </div>
       )}
@@ -183,7 +183,7 @@ const InteractionChecker = () => {
         <div className="space-y-4">
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="flex items-center gap-2 mb-4">
-              <AlertCircle className="w-6 h-6 text-blue-600" />
+              <AlertCircle className="w-6 h-6 text-teal-600" />
               <h2 className="text-xl font-bold text-gray-900">Interaction Results</h2>
             </div>
 
