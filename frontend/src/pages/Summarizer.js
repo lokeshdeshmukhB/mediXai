@@ -75,7 +75,7 @@ const Summarizer = () => {
           <p className="text-gray-600 mt-2">Upload a research paper to get AI-powered summary</p>
         </div>
 
-        <div className="bg-white rounded-xl p-8 shadow-sm border-2 border-dashed border-gray-300 hover:border-teal-500 transition">
+        <div className="bg-white rounded-xl p-8 shadow-sm border-2 border-dashed border-gray-300 hover:border-primary transition">
           <input
             type="file"
             accept=".pdf"
@@ -84,8 +84,8 @@ const Summarizer = () => {
             id="file-upload"
           />
           <label htmlFor="file-upload" className="cursor-pointer block text-center">
-            <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Upload className="w-8 h-8 text-teal-600" />
+            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Upload className="w-8 h-8 text-primary" />
             </div>
             <p className="text-lg font-medium text-gray-900 mb-2">Upload Research Paper</p>
             <p className="text-gray-600">Click to browse or drag and drop your PDF file here</p>
@@ -101,7 +101,7 @@ const Summarizer = () => {
   if (uploading) {
     return (
       <div className="max-w-2xl mx-auto text-center py-16">
-        <div className="w-20 h-20 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+        <div className="w-20 h-20 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Analyzing Paper...</h2>
         <p className="text-gray-600">AI is reading and summarizing your research paper</p>
       </div>
@@ -114,7 +114,7 @@ const Summarizer = () => {
       <div className="max-w-4xl mx-auto space-y-6">
         <button
           onClick={handleReset}
-          className="text-teal-600 hover:underline flex items-center gap-2"
+          className="text-primary hover:underline flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
           Upload another paper
@@ -162,7 +162,7 @@ const Summarizer = () => {
 
             <button 
               onClick={handleReset}
-              className="w-full bg-gradient-to-r from-teal-600 to-blue-600 text-white py-3 rounded-lg font-medium hover:from-teal-700 hover:to-blue-700 transition"
+              className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-secondary transition"
             >
               Summarize Another Paper
             </button>

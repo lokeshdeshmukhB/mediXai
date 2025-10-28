@@ -47,7 +47,7 @@ const Layout = ({ children }) => {
             />
             {isSidebarOpen && (
               <div>
-                <h2 className="font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">Med-G.AI</h2>
+                <h2 className="font-bold text-primary">Med-G.AI</h2>
                 <p className="text-xs text-gray-500">Healthcare Intelligence</p>
               </div>
             )}
@@ -60,7 +60,7 @@ const Layout = ({ children }) => {
                 onClick={() => navigate(item.path)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
                   location.pathname === item.path
-                    ? 'bg-gradient-to-r from-teal-50 to-blue-50 text-teal-600'
+                    ? 'bg-primary-50 text-primary'
                     : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >
@@ -98,7 +98,7 @@ const Layout = ({ children }) => {
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-teal-600 to-blue-600 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -126,11 +126,11 @@ const Layout = ({ children }) => {
             <div className="flex-1">
               <h3 className="font-bold text-gray-900 mb-1">Session Expiring Soon!</h3>
               <p className="text-sm text-gray-600 mb-3">
-                You will be logged out in 1 minute due to inactivity.
+                You will be logged out in 5 minutes due to inactivity.
               </p>
               <button
                 onClick={resetTimeout}
-                className="w-full px-4 py-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white rounded-lg font-medium hover:from-teal-700 hover:to-blue-700 transition"
+                className="w-full px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition"
               >
                 Stay Logged In
               </button>

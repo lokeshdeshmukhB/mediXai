@@ -6,31 +6,27 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        medical: {
-          teal: {
-            50: '#f0fdfa',
-            100: '#ccfbf1',
-            200: '#99f6e4',
-            300: '#5eead4',
-            400: '#2dd4bf',
-            500: '#14b8a6',
-            600: '#0d9488',
-            700: '#0f766e',
-            800: '#115e59',
-            900: '#134e4a',
-          },
-          blue: {
-            50: '#eff6ff',
-            100: '#dbeafe',
-            200: '#bfdbfe',
-            300: '#93c5fd',
-            400: '#60a5fa',
-            500: '#3b82f6',
-            600: '#2563eb',
-            700: '#1d4ed8',
-            800: '#1e40af',
-            900: '#1e3a8a',
-          },
+        primary: {
+          DEFAULT: '#6BBF59',
+          50: '#f0fdf0',
+          100: '#dcfcd6',
+          200: '#bbf7b2',
+          300: '#8eef81',
+          400: '#6BBF59',
+          500: '#4caf50',
+          600: '#2E7D32',
+          700: '#1b5e20',
+          800: '#194d1a',
+          900: '#163f17',
+        },
+        secondary: {
+          DEFAULT: '#2E7D32',
+          light: '#4caf50',
+          dark: '#1b5e20',
+        },
+        text: {
+          primary: '#4A4A4A',
+          secondary: '#B0B0B0',
         },
       },
     },
