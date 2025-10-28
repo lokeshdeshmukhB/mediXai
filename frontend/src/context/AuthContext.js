@@ -17,8 +17,8 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showTimeoutWarning, setShowTimeoutWarning] = useState(false);
 
-  const TIMEOUT_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
-  const WARNING_DURATION = 60 * 1000; // Show warning 1 minute before timeout
+  const TIMEOUT_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+  const WARNING_DURATION = 5 * 60 * 1000; // Show warning 5 minutes before timeout
   const timeoutRef = React.useRef(null);
   const warningRef = React.useRef(null);
 
@@ -61,18 +61,30 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = useCallback(async () => {
     const token = localStorage.getItem('token');
     const savedUser = localStorage.getItem('user');
+    const lastActivity = localStorage.getItem('lastActivity');
 
-    if (token && savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('Auth check failed:', error);
+    // Check if session has expired (more than 1 hour of inactivity)
+    if (token && savedUser && lastActivity) {
+      const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
+      
+      if (timeSinceLastActivity < TIMEOUT_DURATION) {
+        try {
+          setUser(JSON.parse(savedUser));
+          setIsAuthenticated(true);
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          logout();
+        }
+      } else {
+        // Session expired, clear everything
         logout();
       }
+    } else {
+      // No valid session, clear everything
+      logout();
     }
     setLoading(false);
-  }, [logout]);
+  }, [logout, TIMEOUT_DURATION]);
 
   useEffect(() => {
     checkAuth();

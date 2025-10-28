@@ -74,7 +74,7 @@ const Chatbot = () => {
 
   return (
     <div className="max-w-4xl mx-auto h-[calc(100vh-200px)] flex flex-col">
-      <div className="bg-gradient-to-r from-teal-600 to-blue-600 text-white rounded-t-xl p-6">
+      <div className="bg-primary text-white rounded-t-xl p-6">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
             <MessageSquare className="w-6 h-6" />
@@ -93,22 +93,22 @@ const Chatbot = () => {
             className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             {message.role === 'assistant' && (
-              <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <MessageSquare className="w-4 h-4 text-teal-600" />
+              <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <MessageSquare className="w-4 h-4 text-primary" />
               </div>
             )}
             <div
               className={`max-w-md p-4 rounded-2xl ${
                 message.role === 'user'
-                  ? 'bg-gradient-to-r from-teal-600 to-blue-600 text-white'
+                  ? 'bg-primary text-white'
                   : 'bg-gray-100 text-gray-900'
               }`}
             >
               <p className="whitespace-pre-wrap">{message.content}</p>
             </div>
             {message.role === 'user' && (
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <User className="w-4 h-4 text-blue-600" />
+              <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <User className="w-4 h-4 text-primary" />
               </div>
             )}
           </div>
@@ -116,8 +116,8 @@ const Chatbot = () => {
 
         {loading && (
           <div className="flex gap-3 justify-start">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <MessageSquare className="w-4 h-4 text-blue-600" />
+            <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <MessageSquare className="w-4 h-4 text-primary" />
             </div>
             <div className="bg-gray-100 p-4 rounded-2xl">
               <div className="flex gap-2">
@@ -155,12 +155,12 @@ const Chatbot = () => {
             onKeyPress={handleKeyPress}
             placeholder="Ask about drugs, interactions, or study tips..."
             disabled={loading}
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100"
+            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || loading}
-            className="bg-gradient-to-r from-teal-600 to-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:from-teal-700 hover:to-blue-700 transition disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
+            className="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-secondary transition disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
           >
             <Send className="w-5 h-5" />
             Send
