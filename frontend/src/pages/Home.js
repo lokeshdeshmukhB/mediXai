@@ -61,7 +61,7 @@ const Home = () => {
     {
       name: 'Sayali Dhutadmal',
       role: 'Founder',
-      description: 'PharmD Professional & Healthcare Innovator'
+      description: 'B Pharm Professional & Healthcare Innovator'
     },
     {
       name: 'Om Kinhikar',
